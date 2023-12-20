@@ -74,7 +74,7 @@ class PitchPredictor(nn.Module):
         sil_loss = F.binary_cross_entropy_with_logits(input=pred_f0_sil, target=sil_gt.float(), reduction='none')
         sil_loss = true_f0_mask.type_as(sil_loss)
         sil_loss = sil.loss.sum() / true_f0_mask.sum()
-        sil_acc = ((torch.sigmoid(pred_f0_sil)> 0.5).long()) == sil_gt).float()  #noqa   
+        sil_acc = ((torch.sigmoid(pred_f0_sil)> 0.5).long() == sil_gt).float()  #noqa   
         sil_acc = true_f0_mask.type_as(sil_acc)
         sil_acc = sil_acc.sum() / true_f0_mask.sum()
         
